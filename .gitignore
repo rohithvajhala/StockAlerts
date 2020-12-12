@@ -1,2 +1,3 @@
 .vscode/
 **/__pycache__/
+/stock_alerts/db.sqlite3
