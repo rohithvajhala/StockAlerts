@@ -1,0 +1,16 @@
+{% for stock in stocks %}
+    <div class="row" , style="margin-bottom:5px">
+        <div class="card-deck-wrapper">
+            <div class="card-deck">
+                <div class="card p-2">
+                    <a class="card-block stretched-link text-decoration-none" href="#">
+                        <div class="container">
+                            <h5 style="color:black"><b>{{stock.name}} <span
+                                        style="float: right;">{{stock.quote.c}}$</span></b> </h5>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
