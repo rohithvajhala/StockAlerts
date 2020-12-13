@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .card {
+      width: 100%;
+    }
+
+    .container {
+      padding: 2px 16px;
+    }
+</style>
+
+<div class:container-fluid>
+    <div class="card">
+        <div class="container">
+            <form method="POST">
+                {% csrf_token %}
+                <h2>{{stock.description}}  ({{stock.quote.c}}{{stock.currency}})</h2>
+                <p> Threshold Low: <input type="number" name="threshold_low", placeholder={{low_th}}> </p>
+                <p> Threshold High: <input type="number" name="threshold_high", placeholder={{high_th}}> </p>
+                <p> <input type="checkbox" name="send_update"> Get eMail Updates </p>
+                {% for message in messages %}
+                <p style="color:red">{{message}}</p>
+                {% endfor %}
+                <p> <input class="btn btn-dark btn-sm" type="submit" value='save'> </p>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

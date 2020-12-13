@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    .card {
+      width: 100%;
+    }
+
+    .container {
+      padding: 2px 16px;
+    }
+</style>
+
+<div class:container-fluid>
+    {% for stock in watch_list %}
+    <div class="row", style="margin-bottom:5px">
+            <div class="card">
+                <div class="container">
+
+                    <h3> {{stock.stock_full_name}} </h3>
+                    <hr>
+                    <p> Threshold Low: {{stock.threshold_low}} </p>
+                    <p> Threshold High: {{stock.threshold_high}} </p>
+                    <p>
+                        {% if stock.send_update == True %}
+                            Subscribed to active updates
+                        {% else %}
+                            Active updates turned off
+                        {% endif %}
+
+                    </p>
+                </div>
+            </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock %}
