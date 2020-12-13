@@ -41,6 +41,8 @@
                     {% if request.user.is_authenticated %}
                         {% if stock.subscribe_button %}
                             <a class="btn btn-outline-dark btn-sm" href="/subscribe_stock/{{stock.symbol}}", style="float: right"> Subscribe </a>
+                        {% else %}
+                            <a class="btn btn-outline-dark btn-sm" href="/stock_update/{{stock.symbol}}", style="float: right"> Update </a>
                         {% endif %}
                     {% endif %}
                 </div>

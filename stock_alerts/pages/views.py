@@ -96,3 +96,41 @@ def watch_list_view(request, *args, **kwargs):
     watch_list = request.user.customer.userstock_set.all()
     context = {'watch_list': watch_list}
     return render(request, 'watch_list.html', context)
+
+
+@login_required(login_url='login_page')
+def update_view(request, name, *args, **kwargs):
+    watch_list = request.user.customer.userstock_set.all()
+
+    for item in watch_list:
+        if item.stock_name == name:
+            stocks = get_stock_details(name)
+            context = {'stock': stocks,
+                       'low_th': item.threshold_low,
+                       'high_th': item.threshold_high,
+                       'send_update': item.send_update
+                       }
+
+            if request.method == 'POST':
+                data = clean_new_user_stock_form_data(request)
+
+                if data['error']:
+                    messages.error(request, data['error'])
+                    return render(request, 'user_stock_update.html', context)
+
+                item.threshold_low = data['th_low']
+                item.threshold_high = data['th_high']
+                item.send_update = data['send_update']
+                item.save()
+                return redirect('watch_list')
+
+    return render(request, 'user_stock_update.html', context)
+
+@login_required(login_url='login_page')
+def delete_view(request, name, *args, **kwargs):
+    watch_list = request.user.customer.userstock_set.all()
+    for item in watch_list:
+        if item.stock_name == name:
+            item.delete()
+
+    return redirect('watch_list')
