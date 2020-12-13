@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from api.stocks import get_popular_stocks, search_stocks
+from api.stocks import*
 
 
 # Create your views here.
@@ -26,3 +26,23 @@ def home_view(request, *args, **kwargs):
     }
 
     return render(request, "home.html", contents)
+
+
+def stock_details_view(request, name, *args, **kwargs):
+    stocks = get_stock_details(name)
+    if request.user.is_authenticated:
+        watch_list = request.user.customer.userstock_set.all()
+    else:
+        watch_list = []
+
+    stocks['subscribe_button'] = True
+
+    for item in watch_list:
+        if item.stock_name == name:
+            stocks['subscribe_button'] = False
+            break
+
+    params = {
+        'stocks': [stocks],
+    }
+    return render(request, "stock_details.html", params)
