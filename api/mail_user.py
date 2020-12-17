@@ -75,7 +75,7 @@ def send_subscriber_updates():
                         stock.last_update_sent = current_time
                         stock.save()
                     elif(res['c'] > stock.threshold_high):
-                        msg_text = create_high_msg(stock)
+                        msg_txt = create_high_msg(stock)
                         send_mail(user.email, msg_txt)
                         stock.last_update_sent = current_time
                         stock.save()
