@@ -69,14 +69,15 @@ def send_subscriber_updates():
                 if current_time > (ONE_DAY + stock.last_update_sent):
                     res = stock_get_quote(stock.stock_name)
 
-                    if (res['c'] < stock.threshold_low):
-                        msg_txt = create_low_msg(stock)
-                        send_mail(user.email, msg_txt)
-                        stock.last_update_sent = current_time
-                        stock.save()
-                    elif(res['c'] > stock.threshold_high):
-                        msg_txt = create_high_msg(stock)
-                        send_mail(user.email, msg_txt)
-                        stock.last_update_sent = current_time
-                        stock.save()
+                    if res:
+                        if (res['c'] < stock.threshold_low):
+                            msg_txt = create_low_msg(stock)
+                            send_mail(user.email, msg_txt)
+                            stock.last_update_sent = current_time
+                            stock.save()
+                        elif(res['c'] > stock.threshold_high):
+                            msg_txt = create_high_msg(stock)
+                            send_mail(user.email, msg_txt)
+                            stock.last_update_sent = current_time
+                            stock.save()
 
