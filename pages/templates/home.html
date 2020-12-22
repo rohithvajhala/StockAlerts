@@ -5,13 +5,7 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static '/home_cards.css' %}">
 
-<form method="POST"> {% csrf_token %}
-    <input type="text" , name="query" , placeholder="stocks" />
-    <input type="submit" , value="search" />
-</form>
-<br>
-
-<div id="update_this" class:container-fluid>
+<div id="update_this" class="container-fluid">
     {% include 'stock_cards.html' %}
 </div>
 

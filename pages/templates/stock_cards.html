@@ -1,16 +1,25 @@
+<div class="search_bar", style="text-align: center;">
+    <form method="POST" style="display:inline-block"> {% csrf_token %}
+        <input type="text" , name="query" , placeholder="stocks" />
+        <input type="submit" class="btn btn-dark btn-sm", value="search" />
+    </form>
+  </div>
+  <br>
+
 {% for stock in stocks %}
-    <div class="row" , style="margin-bottom:5px">
-        <div class="card-deck-wrapper">
-            <div class="card-deck">
-                <div class="card p-2">
-                    <a class="card-block stretched-link text-decoration-none" href="/stock_details/{{stock.symbol}}">
-                        <div class="container">
-                            <h5 style="color:black"><b>{{stock.name}} <span
-                                        style="float: right;">{{stock.quote.c}}$</span></b> </h5>
-                        </div>
-                    </a>
+<div class="row" , style="margin-bottom:5px; justify-content:center">
+    <div class="card-deck-wrapper">
+        <div class="card p-2">
+            <a class="card-block stretched-link text-decoration-none" href="/stock_details/{{stock.symbol}}">
+                <div class="container">
+                    {% if stock.quote.c > stock.quote.pc %}
+                    <p style="color:black"><b>{{stock.name}} <span style="float: right; color: green;">{{stock.quote.c}}$</span></b> </p>
+                    {% else %}
+                    <p style="color:black"><b>{{stock.name}} <span style="float: right; color: red;">{{stock.quote.c}}$</span></b> </p>
+                    {% endif %}
                 </div>
-            </div>
+            </a>
         </div>
     </div>
+</div>
 {% endfor %}
