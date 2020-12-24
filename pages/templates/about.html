@@ -1,31 +1,34 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2> StockAlerts </h2>
+<div style="color:whitesmoke">
+    <h2> StockAlerts </h2>
 
-<p>
-    Stock alerts is an open source website where users can fetch various US based companies basic information and stock values.
-    Users can create a profile and subscribe to their favorite stocks. Once subscribed, user will be able to get the alerts when their favorite stock price
-    drops/raises depending on the chosen limits.
-    This application uses open source API <a href="https://finnhub.io/">finnhub.io</a> to get the information related to stocks.
-</p>
+    <p>
+        Stock alerts is an open source website where users can fetch various US based companies basic information and stock values.
+        Users can create a profile and subscribe to their favorite stocks. Once subscribed, user will be able to get the alerts when their favorite stock price
+        drops/raises depending on the chosen limits.
+        This application uses open source API <a href="https://finnhub.io/">finnhub.io</a> to get the information related to stocks.
+    </p>
 
-<h3> How to subscribe to stocks? </h3>
+    <h3> How to subscribe to stocks? </h3>
 
-<ol>
-    <li> Create an account <a href="https://my-stock-alerts.herokuapp.com/sign_up"> here </a> and login to your account. </li>
-    <li> Once logged in, on the home page you can search for your favorite stock. </li>
-    <li> It shows the list of stocks based on your search query. Click on the stock you like and you can see more details related to the company. </li>
-    <li> When you scroll to the bottom of the stock details you can see the subscribe button. </li>
-    <li> Once you click subscribe button it will ask you to fill the lower and higher limits for the stock. (You can leave the fields empty if you wish). </li>
-    <li> After selecting the limit check option to receive updates. </li>
+    <ol>
+        <li> Create an account <a href="https://my-stock-alerts.herokuapp.com/sign_up"> here </a> and login to your account. </li>
+        <li> Once logged in, on the home page you can search for your favorite stock. </li>
+        <li> It shows the list of stocks based on your search query. Click on the stock you like and you can see more details related to the company. </li>
+        <li> When you scroll to the bottom of the stock details you can see the subscribe button. </li>
+        <li> Once you click subscribe button it will ask you to fill the lower and higher limits for the stock. (You can leave the fields empty if you wish). </li>
+        <li> After selecting the limit check option to receive updates. </li>
 
-</ol>
-<p> Now you will receive a mail as soon as the stock price drops below your selected lower limit or raises above your selected higher limit. </p>
+    </ol>
+    <p> Now you will receive a mail as soon as the stock price drops below your selected lower limit or raises above your selected higher limit. </p>
 
 
-<h3> Want to update your limits for the stock turnoff alerts? </h3>
-You can easily manage the limits / delete your subscribed stock by going to "WatchList" tab. "WatchList" tab provides you an overview of your subscribed stocks.
+    <h3> Want to update your limits for the stock turnoff alerts? </h3>
+    You can easily manage the limits / delete your subscribed stock by going to "WatchList" tab. "WatchList" tab provides you an overview of your subscribed stocks.
+</div>
+
 
 
 {% endblock %}
