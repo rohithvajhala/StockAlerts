@@ -24,10 +24,10 @@
         </ul>
 
         {% if request.user.is_authenticated %}
-        <span style="color:white; margin-right:5px;"> Hello {{request.user}} </span>
-        <a class="btn btn-outline-light" href="/logout">Logout</a>
+        <span style="color:white; margin-right: 10px;"> Hello {{request.user|upper}} </span>
+        <a class="btn btn-outline-light" style="float:right" href="/logout">Logout</a>
         {% else %}
-        <a class="btn btn-outline-light" href="/login">Login</a>
+        <a class="btn btn-outline-light" style="float:right" href="/login">Login</a>
         {% endif %}
     </div>
 </nav>
