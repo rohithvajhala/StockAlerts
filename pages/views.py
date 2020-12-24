@@ -134,3 +134,7 @@ def delete_view(request, name, *args, **kwargs):
             item.delete()
 
     return redirect('watch_list')
+
+
+def about_view(request, *args, **kwargs):
+    return render(request, 'about.html', {})
