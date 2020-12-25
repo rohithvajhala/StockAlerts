@@ -70,14 +70,16 @@ def send_subscriber_updates():
                     res = stock_get_quote(stock.stock_name)
 
                     if res:
-                        if (res['c'] < stock.threshold_low):
-                            msg_txt = create_low_msg(stock)
-                            send_mail(user.email, msg_txt)
-                            stock.last_update_sent = current_time
-                            stock.save()
-                        elif(res['c'] > stock.threshold_high):
-                            msg_txt = create_high_msg(stock)
-                            send_mail(user.email, msg_txt)
-                            stock.last_update_sent = current_time
-                            stock.save()
+                        if (stock.threshold_low):
+                            if (res['c'] < stock.threshold_low):
+                                msg_txt = create_low_msg(stock)
+                                send_mail(user.email, msg_txt)
+                                stock.last_update_sent = current_time
+                                stock.save()
+                        if (stock.threshold_high):
+                            if(res['c'] > stock.threshold_high):
+                                msg_txt = create_high_msg(stock)
+                                send_mail(user.email, msg_txt)
+                                stock.last_update_sent = current_time
+                                stock.save()
 
