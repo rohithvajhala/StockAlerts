@@ -5,6 +5,8 @@ various US companies. Users can create a profile and subscribe to their favorite
 API [finnhub.io](https://finnhub.io/) to get the information related to stocks.
 
 Live site is available at [https://my-stock-alerts.herokuapp.com/](https://my-stock-alerts.herokuapp.com/)
+
+![Demo](demo/stock_alerts.gif)
 ## Build Requirements
 - Python 3.7 or higher
 - Django
