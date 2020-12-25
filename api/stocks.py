@@ -37,13 +37,19 @@ def stock_get_quote(symbol):
 def get_stock_details(symbol):
     stock = {}
     profile = finnhub_client.company_profile(symbol=symbol)
-    stock['description'] = profile['name']
     stock['quote'] = finnhub_client.quote(symbol=symbol)
-    stock['company_info'] = profile['description']
-    stock['exchange'] = profile['exchange']
-    stock['url'] = profile['weburl']
     stock['symbol'] = symbol
-    stock['currency'] = profile['currency']
+    if profile:
+        stock['description'] = profile['name']
+        stock['company_info'] = profile['description']
+        stock['exchange'] = profile['exchange']
+        stock['url'] = profile['weburl']
+        stock['currency'] = profile['currency']
+    else:
+        loc_data = search_symbol(symbol)
+        stock['description'] = loc_data['description']
+        stock['currency'] = loc_data['currency']
+        stock['company_info'] = "Company information not available"
     return stock
 
 
