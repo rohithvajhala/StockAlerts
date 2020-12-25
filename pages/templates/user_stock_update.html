@@ -4,16 +4,18 @@
 <style>
     .card {
       width: 100%;
+      padding: 1%;
+      margin-top: 2%;
     }
 
-    .container {
+    .container-fluid {
       padding: 2px 16px;
     }
 </style>
 
-<div class:container-fluid>
+<div class="container-fluid">
     <div class="card">
-        <div class="container">
+        <div class="container-fluid">
             <form method="POST">
                 {% csrf_token %}
                 <h2>{{stock.description}}  ({{stock.quote.c}}{{stock.currency}})</h2>

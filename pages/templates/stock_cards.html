@@ -11,7 +11,7 @@
     <div class="card-deck-wrapper">
         <div class="card p-2">
             <a class="card-block stretched-link text-decoration-none" href="/stock_details/{{stock.symbol}}">
-                <div class="container">
+                <div class="container-fluid">
                     {% if stock.quote.c > stock.quote.pc %}
                     <p style="color:black"><b>{{stock.name}} <span style="float: right; color: green;">{{stock.quote.c}}$</span></b> </p>
                     {% else %}

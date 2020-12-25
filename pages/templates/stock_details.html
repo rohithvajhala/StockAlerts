@@ -8,16 +8,16 @@
       padding: 1%;
     }
 
-    .container {
+    .container-fluid {
       padding: 2px 16px;
     }
 </style>
 
-<div class:container-fluid>
+<div class="container-fluid">
     {% for stock in stocks %}
     <div class="row", style="margin-bottom:5px">
             <div class="card">
-                <div class="container">
+                <div class="container-fluid">
                     <h3>{{stock.description}}</h3>
                     <br>
                     <table style="width:50%">
