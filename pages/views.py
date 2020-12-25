@@ -9,22 +9,39 @@ from customer.forms import clean_new_user_stock_form_data
 
 # Create your views here.
 def update_quotes(request):
-    contents = {
-        'stocks': get_popular_stocks(),
-    }
+
+    query = request.GET.get('query')
+    if query:
+        contents = {
+            'stocks': search_stocks(query),
+            'name': query,
+        }
+    else:
+        contents = {
+            'stocks': get_popular_stocks(),
+        }
 
     return render(request, 'update_quotes.html', contents)
 
 
-def home_view(request, *args, **kwargs):
-    contents = {}
+def search_view(request, name, *args, **kwargs):
     if request.POST:
         query = request.POST.get('query')
-        stocks = search_stocks(query)
-        contents = {
-            'stocks': stocks,
-        }
-        return render(request, "search.html", contents)
+        return redirect('search_page', name=query)
+
+    stocks = search_stocks(name)
+    contents = {
+        'stocks': stocks,
+        'name': name,
+    }
+
+    return render(request, 'search.html', contents)
+
+
+def home_view(request, *args, **kwargs):
+    if request.POST:
+        query = request.POST.get('query')
+        return redirect('search_page', name=query)
 
     contents = {
         'stocks': get_popular_stocks(),

@@ -5,9 +5,23 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static '/home_cards.css' %}" >
 
-<div class=container-fluid>
+<div id="update_this" class="container-fluid">
     {% include 'stock_cards.html' %}
 </div>
+
+<script>
+    var query = "{{name}}";
+    setInterval(function () {
+        $.ajax({
+            type: "GET",
+            url: '/update_quotes',  // URL to your view that serves new info
+            data: {'query': query}
+        })
+            .done(function (response) {
+                $('#update_this').html(response)
+            });
+    }, 10000)
+</script>
 
 {% endblock %}
 
