@@ -32,12 +32,11 @@
                     </table>
                     <br>
 
-                    <p>{{stock.company_info}}</p>
-                    <p><b>website</b>: <a href={{stock.url}}>{{stock.url}}</a></p>
                     <p>
                         <b>Symbol</b>: {{stock.symbol}} <br>
                         <b>Exchange</b>: {{stock.exchange}} <br>
                         <b>Currency</b>: {{stock.currency}} <br>
+                        <b>website</b>: <a href={{stock.url}}>{{stock.url}}</a>
                     </p>
 
                     {% if request.user.is_authenticated %}
