@@ -1,3 +1,4 @@
+{% load filters %}
 {% for stock in stocks %}
 <div class="row" , style="margin-bottom:5px; justify-content:center">
     <div class="card-deck-wrapper">
@@ -5,9 +6,9 @@
             <a class="card-block stretched-link text-decoration-none" href="/stock_details/{{stock.symbol}}">
                 <div class="container-fluid">
                     {% if stock.quote.c > stock.quote.pc %}
-                    <p style="color:black"><b>{{stock.name}} <span style="float: right; color: green;">{{stock.quote.c}}$</span></b> </p>
+                    <p style="color:black"><b>{{stock.name}} <span style="float: right; color: green;">{{stock.quote.c}}$ <sub>({{stock.quote.c|subtract:stock.quote.pc}}$)</sub></span></b> </p>
                     {% else %}
-                    <p style="color:black"><b>{{stock.name}} <span style="float: right; color: red;">{{stock.quote.c}}$</span></b> </p>
+                    <p style="color:black"><b>{{stock.name}} <span style="float: right; color: red;">{{stock.quote.c}}$ <sub>({{stock.quote.c|subtract:stock.quote.pc}}$)</sub></span></b> </p>
                     {% endif %}
                 </div>
             </a>
