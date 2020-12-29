@@ -5,6 +5,10 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static '/home_cards.css' %}" >
 
+{% include 'search_form.html' %}
+
+<br>
+
 <div id="update_this" class="container-fluid">
     {% include 'stock_cards.html' %}
 </div>
