@@ -26,3 +26,5 @@ class UserStock(models.Model):
     send_update = models.BooleanField(verbose_name="send update")
     last_update_sent = models.IntegerField(verbose_name="last_update_sent",
                                            null=True, blank=True, default=0)
+    last_update_sent_high = models.IntegerField(verbose_name="last_update_sent_high",
+                                                null=True, blank=True, default=0)
