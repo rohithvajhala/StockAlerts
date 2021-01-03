@@ -138,6 +138,8 @@ def update_view(request, name, *args, **kwargs):
                 item.threshold_low = data['th_low']
                 item.threshold_high = data['th_high']
                 item.send_update = data['send_update']
+                item.last_update_sent = 0
+                item.last_update_sent_high = 0
                 item.save()
                 return redirect('watch_list')
 
