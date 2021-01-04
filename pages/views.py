@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
+from django.http import JsonResponse
 from api.stocks import*
 from customer.models import UserStock, Customer
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from customer.forms import clean_new_user_stock_form_data
-
+import json
 
 # Create your views here.
 def update_quotes(request):
@@ -65,8 +66,9 @@ def stock_details_view(request, name, *args, **kwargs):
             break
 
     params = {
-        'stocks': [stocks],
+        'stock': stocks,
     }
+
     return render(request, "stock_details.html", params)
 
 
@@ -157,3 +159,25 @@ def delete_view(request, name, *args, **kwargs):
 
 def about_view(request, *args, **kwargs):
     return render(request, 'about.html', {})
+
+
+def get_chart_data(request, name, *args, **kwargs):
+
+    labels, data = get_stock_candles(name)
+
+    if (data[0] < data[-1]):
+        print('camehere')
+        background_clr = 'rgba(75, 192, 192, 0.2)'
+        border_clr = 'rgba(75, 192, 192, 1)'
+    else:
+        background_clr = 'rgba(255, 99, 132, 0.2)'
+        border_clr = 'rgba(255, 99, 132, 1)'
+
+    data = {
+        'stock_dates': labels,
+        'stock_prices': data,
+        'bg_clr': background_clr,
+        'bd_clr': border_clr
+    }
+
+    return JsonResponse(data)

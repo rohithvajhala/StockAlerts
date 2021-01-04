@@ -13,8 +13,10 @@
     }
 </style>
 
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha256-t9UJPrESBeG2ojKTIcFLPGF7nHi2vEc7f5A2KpH/UBU=" crossorigin="anonymous"></script>
+
 <div class="container-fluid">
-    {% for stock in stocks %}
     <div class="row", style="margin-bottom:5px">
             <div class="card">
                 <div class="container-fluid">
@@ -32,6 +34,7 @@
                     </table>
                     <br>
 
+                    <canvas id="myChart" width="50%" height="30%"></canvas>
                     <p>
                         <b>Symbol</b>: {{stock.symbol}} <br>
                         <b>Exchange</b>: {{stock.exchange}} <br>
@@ -49,7 +52,59 @@
                 </div>
             </div>
     </div>
-    {% endfor %}
+
 </div>
+
+<script>
+var endpoint = 'api/chart_data'
+var labels = []
+var stock_data = [];
+
+$.ajax({
+    method: "GET",
+    url:endpoint,
+    success: function(data){
+        labels = data.stock_dates
+        stock_data = data.stock_prices
+        bg_clr = data.bg_clr
+        bd_clr = data.bd_clr
+        set_chart()
+    },
+    error: function(error_data){
+        console.log("error")
+        console.log(error_data)
+    }
+})
+
+function set_chart(){
+    var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Price History',
+                data: stock_data,
+                backgroundColor: [
+                    bg_clr,
+                ],
+                borderColor: [
+                    bd_clr,
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+}
+</script>
 
 {% endblock %}

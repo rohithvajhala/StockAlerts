@@ -4,6 +4,7 @@ import finnhub
 import finnhub.exceptions as esc
 import json
 import os
+import time
 
 with open('static/symbols.json') as f:
     data = json.load(f)
@@ -87,3 +88,13 @@ def get_popular_stocks():
 
     stock_list = get_stock_cards(popular_stock_symbols)
     return stock_list
+
+
+def get_stock_candles(symbol):
+    to_timestamp = int(time.time())
+    from_timestamp = to_timestamp - (60 * 60 * 24 * 90)
+    candles = finnhub_client.stock_candles(symbol, 'D', from_timestamp, to_timestamp)
+    time_list = [time.ctime(time_stamp)[4:10] for time_stamp in candles['t']]
+
+    return time_list, candles['c']
+
