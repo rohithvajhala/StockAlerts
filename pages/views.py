@@ -28,7 +28,8 @@ def update_quotes(request):
 def search_view(request, name, *args, **kwargs):
     if request.POST:
         query = request.POST.get('query')
-        return redirect('search_page', name=query)
+        if query:
+            return redirect('search_page', name=query)
 
     stocks = search_stocks(name)
     contents = {
@@ -42,7 +43,8 @@ def search_view(request, name, *args, **kwargs):
 def home_view(request, *args, **kwargs):
     if request.POST:
         query = request.POST.get('query')
-        return redirect('search_page', name=query)
+        if query:
+            return redirect('search_page', name=query)
 
     contents = {
         'stocks': get_popular_stocks(),
